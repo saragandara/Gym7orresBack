@@ -269,5 +269,20 @@ export const tableController = {
       console.error('Error removing exercise from table:', error);
       res.status(500).json({ error: 'Error al eliminar ejercicio de la tabla' });
     }
+  },
+
+  // Eliminar todas las tablas
+  deleteAll: async (req: Request, res: Response) => {
+    try {
+      const result = await Table.deleteMany({});
+      
+      res.json({ 
+        message: 'Todas las tablas han sido eliminadas',
+        deletedCount: result.deletedCount
+      });
+    } catch (error) {
+      console.error('Error deleting all tables:', error);
+      res.status(500).json({ error: 'Error al eliminar todas las tablas' });
+    }
   }
 };
