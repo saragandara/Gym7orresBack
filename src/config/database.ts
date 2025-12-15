@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 export const connectDB = async (): Promise<void> => {
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/tablas-gym';
+    const password = process.env.MONGODB_PASSWORD 
+      ? Buffer.from(process.env.MONGODB_PASSWORD, 'base64').toString('utf-8')
+      : '';
+    const mongoUri = process.env.MONGODB_URI_BASE?.replace('%pass%', password) || 'mongodb://localhost:27017';
     const dbName = process.env.NODE_ENV === 'test' ? 'gym-test' : 'gym';
     
     await mongoose.connect(mongoUri, {
