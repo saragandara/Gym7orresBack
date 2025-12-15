@@ -5,6 +5,7 @@ import { connectDB } from './config/database';
 import categoryRoutes from './routes/category.routes';
 import exerciseRoutes from './routes/exercise.routes';
 import tableRoutes from './routes/table.routes';
+import tableHistoryRoutes from './routes/table-history.routes';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/categories', categoryRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/tables', tableRoutes);
+app.use('/api/tables-history', tableHistoryRoutes);
 
 // Database connection and server start
 const startServer = async () => {

@@ -8,6 +8,7 @@ router.get('/:id', tableController.getById);
 router.post('/', tableController.create);
 router.put('/:id', tableController.update);
 router.delete('/:id', tableController.delete);
+router.delete('/', tableController.deleteAll);
 
 // Rutas para gestionar ejercicios dentro de una tabla
 router.post('/:id/exercises', tableController.addExercise);
