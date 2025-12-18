@@ -7,7 +7,8 @@ export const connectDB = async (): Promise<void> => {
     const password = MONGODB_PASSWORD 
       ? Buffer.from(MONGODB_PASSWORD, 'base64').toString('utf-8')
       : '';
-    const mongoUri = process.env.MONGODB_URI_BASE?.replace('%pass%', password); // || 'mongodb://localhost:27017';
+    const mongoUriBase = 'mongodb+srv://juana_user:%pass%@juanalalokcluster.1sx4lns.mongodb.net/?appName=juanalalokcluster';
+    const mongoUri = mongoUriBase?.replace('%pass%', password) || 'mongodb://localhost:27017';
     const dbName = process.env.NODE_ENV === 'test' ? 'gym-test' : 'gym';
     
     await mongoose.connect(mongoUri, {
