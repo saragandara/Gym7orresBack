@@ -6,6 +6,7 @@ export interface ITableExercise {
   name?: string;
   color?: string;
   categoryId?: Types.ObjectId;
+  repeticiones?: string;
 }
 
 export interface ITable extends Document {
@@ -39,6 +40,11 @@ const TableExerciseSchema = new Schema({
   categoryId: {
     type: Schema.Types.ObjectId,
     ref: 'Category'
+  },
+  repeticiones: {
+    type: String,
+    required: false,
+    trim: true
   }
 }, { _id: false });
 
