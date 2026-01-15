@@ -46,7 +46,7 @@ export const exerciseController = {
   // Crear nuevo ejercicio
   create: async (req: Request, res: Response) => {
     try {
-      const { name, categoryId } = req.body;
+      const { name, categoryId, repeticiones } = req.body;
 
       // Validar datos
       if (!name || !categoryId) {
@@ -59,7 +59,7 @@ export const exerciseController = {
         return res.status(400).json({ error: 'La categoría especificada no existe' });
       }
 
-      const exercise = new Exercise({ name, categoryId });
+      const exercise = new Exercise({ name, categoryId, repeticiones });
       await exercise.save();
       
       res.status(201).json(exercise);
@@ -73,9 +73,9 @@ export const exerciseController = {
   update: async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { name, categoryId } = req.body;
+      const { name, categoryId, repeticiones } = req.body;
 
-      if (!name && !categoryId) {
+      if (!name && !categoryId && !repeticiones) {
         return res.status(400).json({ error: 'Debe proporcionar al menos un campo para actualizar' });
       }
 
@@ -90,6 +90,7 @@ export const exerciseController = {
       const updateData: any = {};
       if (name) updateData.name = name;
       if (categoryId) updateData.categoryId = categoryId;
+      if (repeticiones !== undefined) updateData.repeticiones = repeticiones;
 
       const exercise = await Exercise.findByIdAndUpdate(
         id,

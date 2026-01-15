@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Types } from 'mongoose';
 export interface IExercise extends Document {
   name: string;
   categoryId: Types.ObjectId;
+  repeticiones?: string;
 }
 
 const ExerciseSchema: Schema = new Schema({
@@ -17,6 +18,11 @@ const ExerciseSchema: Schema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'Category'
+  },
+  repeticiones: {
+    type: String,
+    required: false,
+    trim: true
   }
 }, {
   timestamps: true,
